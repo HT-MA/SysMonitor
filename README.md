@@ -1,153 +1,158 @@
-# SysScope - 本地系统监控 Web 应用
+# SysScope - Local System Monitoring Web Application
 
-一个现代化的本地系统监控 Dashboard，用于实时查看计算机的运行状态。
+A modern local system monitoring dashboard for real-time viewing of computer running status.
 
-## 功能特性
+## Features
 
-- **Dashboard**: 系统概览，显示 CPU、内存、进程、端口等关键指标
-- **CPU Monitor**: 实时 CPU 使用率监控，带历史折线图
-- **Memory Monitor**: 内存使用情况，包含饼图可视化
-- **Process Monitor**: 进程列表，支持搜索和排序
-- **Port Monitor**: 监听端口列表，支持过滤
-- **System Info**: 系统详细信息
+- **Dashboard**: System overview displaying CPU, memory, processes, ports, and other key metrics
+- **CPU Monitor**: Real-time CPU usage monitoring with historical line chart
+- **Memory Monitor**: Memory usage with pie chart visualization
+- **Process Monitor**: Process list with search and sorting support
+- **Port Monitor**: Listening port list with filtering support
+- **System Info**: Detailed system information
 
-## 技术栈
+## Tech Stack
 
-### 后端
+### Backend
 - Python 3.8+
-- FastAPI - Web 框架
-- psutil - 系统信息获取
-- uvicorn - ASGI 服务器
+- FastAPI - Web framework
+- psutil - System information retrieval
+- uvicorn - ASGI server
 
-### 前端
-- Vue 3 - 前端框架
-- Element Plus - UI 组件库
-- ECharts - 数据可视化
+### Frontend
+- Vue 3 - Frontend framework
+- Element Plus - UI component library
+- ECharts - Data visualization
 
-## 项目结构
+## Project Structure
 
 ```
 local-dashboard/
 ├── backend/
-│   ├── main.py              # FastAPI 主应用
-│   ├── requirements.txt     # Python 依赖
+│   ├── main.py              # FastAPI main application
+│   ├── requirements.txt     # Python dependencies
 │   └── api/
 │       ├── cpu.py          # CPU API
-│       ├── memory.py       # 内存 API
-│       ├── process.py      # 进程 API
-│       ├── ports.py        # 端口 API
-│       └── system.py       # 系统信息 API
+│       ├── memory.py       # Memory API
+│       ├── process.py      # Process API
+│       ├── ports.py        # Port API
+│       └── system.py       # System info API
 └── frontend/
-    ├── index.html          # HTML 入口
-    ├── style.css           # 样式文件
-    ├── app.js              # Vue 主应用
+    ├── index.html          # HTML entry point
+    ├── style.css           # Stylesheet
+    ├── app.js              # Vue main application
     ├── api/
-    │   └── monitor.js      # API 调用
+    │   └── monitor.js      # API calls
     ├── components/
-    │   ├── InfoCard.js     # 信息卡片组件
-    │   ├── CpuChart.js     # CPU 图表组件
-    │   └── MemoryChart.js  # 内存图表组件
+    │   ├── InfoCard.js     # Info card component
+    │   ├── CpuChart.js     # CPU chart component
+    │   └── MemoryChart.js  # Memory chart component
     └── views/
-        ├── Dashboard.js    # Dashboard 视图
-        ├── Cpu.js          # CPU 视图
-        ├── Memory.js       # 内存视图
-        ├── Process.js      # 进程视图
-        ├── Ports.js        # 端口视图
-        └── System.js       # 系统信息视图
+        ├── Dashboard.js    # Dashboard view
+        ├── Cpu.js          # CPU view
+        ├── Memory.js       # Memory view
+        ├── Process.js      # Process view
+        ├── Ports.js        # Port view
+        └── System.js       # System info view
 ```
 
-## 快速开始
+## Quick Start
 
-### 1. 安装 Python 依赖
+### 1. Install Python Dependencies
 
 ```bash
 cd backend
 pip install -r requirements.txt
 ```
 
-### 2. 启动后端服务
+### 2. Start Backend Server
 
 ```bash
 python main.py
 ```
 
-后端服务将在 `http://127.0.0.1:8000` 启动
+The backend server will start at `http://127.0.0.1:8000`
 
-### 3. 访问应用
+### 3. Access Application
 
-在浏览器中打开：
+Open in browser:
 
 ```
 http://localhost:8000
 ```
 
-## API 接口
+## API Endpoints
 
-| 接口 | 方法 | 描述 |
-|------|------|------|
-| `/api/cpu` | GET | 获取 CPU 使用率 |
-| `/api/memory` | GET | 获取内存信息 |
-| `/api/process` | GET | 获取进程列表 |
-| `/api/ports` | GET | 获取监听端口 |
-| `/api/system` | GET | 获取系统信息 |
+| Endpoint | Method | Description |
+|----------|--------|-------------|
+| `/api/cpu` | GET | Get CPU usage |
+| `/api/memory` | GET | Get memory information |
+| `/api/process` | GET | Get process list |
+| `/api/process/stop` | POST | Stop a process |
+| `/api/process/kill` | POST | Kill a process |
+| `/api/ports` | GET | Get listening ports |
+| `/api/system` | GET | Get system information |
 
-## 功能说明
+## Feature Details
 
 ### Dashboard
-显示系统整体状态，包括：
-- CPU 使用率
-- 内存使用率
-- 进程数量
-- 监听端口数量
-- 系统运行时间
+Displays overall system status including:
+- CPU usage
+- Memory usage
+- Process count
+- Listening port count
+- System uptime
+- Hardware and system information
 
 ### CPU Monitor
-- 实时显示 CPU 使用率
-- 折线图展示过去 60 秒的历史数据
-- 显示当前值、平均值和峰值
+- Real-time CPU usage display
+- Line chart showing last 60 seconds of historical data
+- Displays current value, average, and peak
 
 ### Memory Monitor
-- 显示总内存、已用内存、空闲内存
-- 饼图可视化内存使用情况
-- 进度条显示使用百分比
+- Displays total memory, used memory, free memory
+- Pie chart visualization of memory usage
+- Progress bar showing usage percentage
 
 ### Process Monitor
-- 显示进程列表（PID、名称、CPU%、内存%、状态）
-- 支持按名称或 PID 搜索
-- 支持按各字段排序
+- Displays process list (PID, name, CPU%, memory%, status)
+- Search by name or PID
+- Sort by any field
+- Kill process functionality with confirmation
+- Protected system processes cannot be terminated
 
 ### Port Monitor
-- 显示监听端口（端口、协议、进程、PID）
-- 支持按端口或进程搜索
-- 支持按协议过滤
+- Displays listening ports (port, protocol, process, PID)
+- Search by port or process
+- Filter by protocol
 
 ### System Info
-- 显示操作系统信息
-- 显示主机名
-- 显示 CPU 型号和核心数
-- 显示总内存
+- Displays operating system information
+- Displays hostname
+- Displays CPU model and core count
+- Displays total memory
 
-## 刷新机制
+## Refresh Mechanism
 
-前端每 2 秒自动刷新一次数据，确保监控信息的实时性。
+The frontend automatically refreshes data every 2 seconds to ensure real-time monitoring information.
 
-## 安全策略
+## Security Policy
 
-应用默认只监听 `127.0.0.1`，仅允许本地访问，防止远程访问。
+The application only listens on `127.0.0.1`, allowing only local access and preventing remote access.
 
-## 性能要求
+## Performance Requirements
 
-- CPU 占用 < 2%
-- 内存占用 < 100MB
-- API 响应时间 < 100ms
+- CPU usage < 2%
+- Memory usage < 100MB
+- API response time < 100ms
 
-## 浏览器兼容性
+## Browser Compatibility
 
-支持现代浏览器：
+Supports modern browsers:
 - Chrome/Edge 90+
 - Firefox 88+
 - Safari 14+
 
-## 许可证
+## License
 
 MIT License
