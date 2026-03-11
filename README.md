@@ -58,14 +58,37 @@ local-dashboard/
 
 ## Quick Start
 
-### 1. Install Python Dependencies
+### Option 1: Using uv (Recommended)
+
+#### 1. Install uv
+```bash
+pip install uv
+```
+
+#### 2. Install Dependencies
+```bash
+cd backend
+uv sync
+```
+
+#### 3. Start Backend Server
+```bash
+cd backend
+uv run start
+```
+
+The backend server will start at `http://127.0.0.1:8000`
+
+### Option 2: Using pip
+
+#### 1. Install Python Dependencies
 
 ```bash
 cd backend
 pip install -r requirements.txt
 ```
 
-### 2. Start Backend Server
+#### 2. Start Backend Server
 
 ```bash
 python main.py
