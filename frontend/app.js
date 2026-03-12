@@ -34,9 +34,9 @@ const app = createApp({
                 this.fetchCpuData(),
                 this.fetchMemoryData(),
                 this.fetchProcessData(),
-                this.fetchPortsData(),
-                this.fetchSystemData()
+                this.fetchPortsData()
             ]);
+            await this.fetchSystemData();
         },
         async fetchDashboardData() {
             try {
