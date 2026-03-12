@@ -9,6 +9,7 @@ const DashboardView = {
             default: () => ({})
         }
     },
+
     components: {
         'info-card': InfoCard
     },

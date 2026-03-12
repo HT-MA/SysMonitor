@@ -11,7 +11,12 @@ const app = createApp({
             processData: [],
             portsData: [],
             systemData: {},
+            networkData: {},
+            networkInterfaces: [],
+            diskData: {},
+            diskPartitions: [],
             refreshInterval: null,
+            refreshDelay: 2500,
             startTime: null
         };
     },
@@ -34,7 +39,9 @@ const app = createApp({
                 this.fetchCpuData(),
                 this.fetchMemoryData(),
                 this.fetchProcessData(),
-                this.fetchPortsData()
+                this.fetchPortsData(),
+                this.fetchNetworkData(),
+                this.fetchDiskData()
             ]);
             await this.fetchSystemData();
         },
@@ -112,6 +119,30 @@ const app = createApp({
                 console.error('Failed to fetch system data:', error);
             }
         },
+        async fetchNetworkData() {
+            try {
+                const [network, interfaces] = await Promise.all([
+                    MonitorAPI.getNetwork(),
+                    MonitorAPI.getNetworkInterfaces()
+                ]);
+                if (network) this.networkData = network;
+                if (interfaces) this.networkInterfaces = interfaces;
+            } catch (error) {
+                console.error('Failed to fetch network data:', error);
+            }
+        },
+        async fetchDiskData() {
+            try {
+                const [disk, partitions] = await Promise.all([
+                    MonitorAPI.getDisk(),
+                    MonitorAPI.getDiskPartitions()
+                ]);
+                if (disk) this.diskData = disk;
+                if (partitions) this.diskPartitions = partitions;
+            } catch (error) {
+                console.error('Failed to fetch disk data:', error);
+            }
+        },
         calculateUptime() {
             const elapsed = Date.now() - this.startTime;
             const days = Math.floor(elapsed / (1000 * 60 * 60 * 24));
@@ -120,7 +151,7 @@ const app = createApp({
         startAutoRefresh() {
             this.refreshInterval = setInterval(() => {
                 this.fetchAllData();
-            }, 2000);
+            }, this.refreshDelay);
         },
         stopAutoRefresh() {
             if (this.refreshInterval) {
@@ -144,5 +175,7 @@ app.component('memory-view', MemoryView);
 app.component('process-view', ProcessView);
 app.component('ports-view', PortsView);
 app.component('system-view', SystemView);
+app.component('network-view', NetworkView);
+app.component('disk-view', DiskView);
 
 app.mount('#app');

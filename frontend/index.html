@@ -48,6 +48,14 @@
                             <el-icon><icon-system /></el-icon>
                             <span>System Info</span>
                         </el-menu-item>
+                        <el-menu-item index="network">
+                            <el-icon><icon-network /></el-icon>
+                            <span>Network</span>
+                        </el-menu-item>
+                        <el-menu-item index="disk">
+                            <el-icon><icon-disk /></el-icon>
+                            <span>Disk</span>
+                        </el-menu-item>
                     </el-menu>
                 </el-aside>
                 <el-main>
@@ -69,6 +77,12 @@
                     <div v-if="activeMenu === 'system'">
                         <system-view :data="systemData"></system-view>
                     </div>
+                    <div v-if="activeMenu === 'network'">
+                        <network-view :data="networkData" :interfaces="networkInterfaces"></network-view>
+                    </div>
+                    <div v-if="activeMenu === 'disk'">
+                        <disk-view :data="diskData" :partitions="diskPartitions"></disk-view>
+                    </div>
                 </el-main>
             </el-container>
         </el-container>
@@ -78,16 +92,18 @@
     <script src="https://unpkg.com/element-plus"></script>
     <script src="https://unpkg.com/@element-plus/icons-vue"></script>
     <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
-    <script src="api/monitor.js"></script>
-    <script src="components/InfoCard.js"></script>
-    <script src="components/CpuChart.js"></script>
-    <script src="components/MemoryChart.js"></script>
-    <script src="views/Dashboard.js?v=1.0.1"></script>
-    <script src="views/Cpu.js?v=1.0.1"></script>
-    <script src="views/Memory.js?v=1.0.1"></script>
-    <script src="views/Process.js?v=1.0.1"></script>
-    <script src="views/Ports.js?v=1.0.1"></script>
-    <script src="views/System.js?v=1.0.1"></script>
-    <script src="app.js?v=1.0.1"></script>
+    <script src="api/monitor.js?v=1.0.2"></script>
+    <script src="components/InfoCard.js?v=1.0.2"></script>
+    <script src="components/CpuChart.js?v=1.0.2"></script>
+    <script src="components/MemoryChart.js?v=1.0.2"></script>
+    <script src="views/Dashboard.js?v=1.0.2"></script>
+    <script src="views/Cpu.js?v=1.0.2"></script>
+    <script src="views/Memory.js?v=1.0.2"></script>
+    <script src="views/Process.js?v=1.0.2"></script>
+    <script src="views/Ports.js?v=1.0.2"></script>
+    <script src="views/System.js?v=1.0.2"></script>
+    <script src="views/Network.js?v=1.0.2"></script>
+    <script src="views/Disk.js?v=1.0.2"></script>
+    <script src="app.js?v=1.0.2"></script>
 </body>
 </html>
